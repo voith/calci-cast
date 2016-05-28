@@ -1,0 +1,26 @@
+{
+    "name": "Django Calculator Chat",
+    "description": "An App that logs calculations made by users and shares with other users real-time",
+    "repository": "https://github.com/voith/calculator-chat",
+    "keywords": ["django", "channels", "websockets"],
+    "scripts": {
+        "postdeploy": "python manage.py migrate"
+    },
+    "env": {
+        "SECRET_KEY": {
+            "description": "Django's SECRET_KEY setting",
+            "generator": "secret"
+        }
+    },
+    "addons": ["heroku-postgresql", "heroku-redis"],
+    "formation": {
+        "web": {
+            "quantity": 1,
+          " size": "Free"
+        },
+        "worker": {
+            "quantity": 1,
+            "size": "Free"
+        }
+    }
+}

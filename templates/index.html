@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chat Calculator</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href='{% static "bootstrap.min.css" %}'/>
+    <link rel="stylesheet" href='{% static "bootstrap-responsive.min.css" %}'/>
+    <link rel="stylesheet" href='{% static "application.css" %}'/>
+
+    <script src='{% static "jquery-1.12.1.min.js" %}'></script>
+    <script src='{% static "application.js" %}'></script>
+    <script src='{% static "reconnecting-websocket.min.js" %}'></script>
+  </head>
+  <body>
+
+    <div class="navbar navbar-inverse">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="#">Simple Chat Calculator</a>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container">
+
+      <div class="hero-unit" id="calculator-wrapper">
+        <div class="row-fluid">
+          <div class="span5">
+            <div id="calculator-screen" class="uneditable-input"></div>
+          </div>
+          <div class="span1" style="text-align: center;">
+            <div class="visible-phone">
+              =
+            </div>
+            <div class="hidden-phone">
+              =
+            </div>
+          </div>
+          <div class="span5">
+            <div id="calculator-result"  class="uneditable-input">0</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row-fluid">
+
+        <div class="span5 well">
+          <div id="calc-board">
+            <div class="row-fluid">
+              <span class="btn">7</span>
+              <span class="btn">8</span>
+              <span class="btn">9</span>
+              <span class="btn">(</span>
+              <span class="btn">)</span>
+            </div>
+            <div class="row-fluid">
+              <span class="btn">4</span>
+              <span class="btn">5</span>
+              <span class="btn">6</span>
+              <span class="btn">-</span>
+              <span class="btn">+</span>
+            </div>
+            <div class="row-fluid">
+              <span class="btn">1</span>
+              <span class="btn">2</span>
+              <span class="btn">3</span>
+              <span class="btn">/</span>
+              <span class="btn">*</span>
+            </div>
+            <div class="row-fluid">
+              <span class="btn">.</span>
+              <span class="btn">0</span>
+              <span class="btn">%</span>
+              <span class="btn btn-primary" 
+                    id="equals">=</span>
+              <span class="btn btn-danger"
+                    id="clear">C</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="span7 well">
+          <legend>
+            <b>Chat Log</b>
+            <div id="handle-panel">
+            <span>Your Name:<span>
+            <input id="handle"
+                   type="text" 
+                   class="form-control" 
+                   placeholder="Enter Name" 
+                   aria-describedby="basic-addon1" 
+                   name="handle">
+            </div>
+          </legend>
+          <div id="chat-panel">
+            <table class="table table-striped">
+              <Thead>
+                <th>Timestamp</th>
+                <th>Sender</th>
+                <th>Expression</th>
+              </Thead>
+              <tbody id="chat">
+              {% for message in messages %}
+                <tr>
+                  <td>{{ message.formatted_timestamp }}</td>
+                  <td>{{ message.handle }}</td>
+                  <td>{{ message.message }}</td>
+                </tr> 
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <hr>
+
+      </div>
+    </div>
+
+  </body>
+</html>
