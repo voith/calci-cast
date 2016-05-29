@@ -55,7 +55,6 @@ TEMPLATES = (
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
 DATABASES = {
-    # 'default': dj_database_url.config(default="postgres://vriciczfzvvnat:6gkL3vQRevQVTdNZ-iB2t7x6_5@ec2-54-243-249-65.compute-1.amazonaws.com:5432/d3b0qls99lv31f", conn_max_age=500)
 'default': dj_database_url.config(default="postgres:///calculator_chat", conn_max_age=500)
 }
 
