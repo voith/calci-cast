@@ -1,56 +1,25 @@
-.navbar-inner {
-    border-radius: 0 0 0 0;
-}
-
-.hero-unit {
-  margin-top: 30px;
-  padding: 30px;
-  margin-bottom: 50px;
-}
-#calculator-wrapper {
-  font-size: 20px;
-}
-#calculator-wrapper .uneditable-input {
-  height: 30px;
-  font-size: 20px;
-  line-height: 35px;
-  width: 100%;
-}
-#calculator-wrapper .span1 {
-  height: 42px;
-  font-size: 42px;
-}
-#calc-board{
-  margin-left: 7%;
-}
-#calculator-wrapper .span1 .visible-phone {
-  line-height: 25px;
-}
-#calculator-wrapper .span1 .hidden-phone {
-  line-height: 42px;
-}
 .btn {
-  width: 10%;
-  height: 50px;
-  margin: 0 5px 5px 0;
-  line-height: 50px;
+  width: 11%;
+  height: 10%;
+  margin: 0 1.2% 1.2% 0;
+  line-height: 150%;
   font-weight: bold;
-  font-size: 25px;
+  font-size: 180%;
 }
-#handle-panel{
-  float: right;
-}
+
 #chat-panel{
-  height: 200px;
-  overflow-y: scroll; 
+    height: 152px;
+    overflow-y: scroll;
 }
 
-/*table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
+@media only screen and (min-width: 1000px) {
+  #handle-panel{
+    float: right;
+  }
 
-td,
-th {
-  padding: 0;
-}*/
+  #calculator-wrapper{
+    margin-top: 30px;
+    margin-bottom: 70px;
+  }
+  
+}

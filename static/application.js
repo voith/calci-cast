@@ -4,54 +4,65 @@ $(document).ready(function(){
   var $result = $('#calculator-result');
   var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
   var chatsock = new ReconnectingWebSocket(ws_scheme + '://' + window.location.host + "/chat" + window.location.pathname);
-  
-  var scroll_bottom = function(){
+  var scrollBottom = function(){
     var scroll = $('#chat-panel');
     scroll.scrollTop(scroll.prop("scrollHeight"));
   };
-  scroll_bottom();
+  
+  scrollBottom();
+  
   chatsock.onmessage = function(message) {
       var data = JSON.parse(message.data);
-      var chat = $("#chat")
-      var ele = $('<tr></tr>')
+      var chat = $("#chat");
+      var ele = $('<tr></tr>');
+      var logCount;
 
       ele.append(
           $("<td></td>").text(data.timestamp)
-      )
+      );
       ele.append(
           $("<td></td>").text(data.handle)
-      )
+      );
       ele.append(
           $("<td></td>").text(data.message)
-      )
+      );
       
-      chat.append(ele)
-      scroll_bottom();
+      chat.append(ele);
+      
+      logCount = chat.find('tr').length;
+      if(logCount >= 10){
+        chat.find('tr').first().remove();
+      }
+
+      scrollBottom();
     };
   
   $('#clear').on('click', function() {
-    $screen.text('');
-    $result.text('');
+    $screen.val('');
+    $result.val('');
   });
 
   $('#equals').on('click', function() {
-    var expression = $screen.text();
+    var expression = $screen.val();
+    var total;
 
-    if (expression === 'Error') {
+    if (expression === 'Error' || !expression) {
       return;
     }
-    var total;
+    
     try{
       total = eval(expression); 
     }
     catch(err){
       total = 'Error'
-      $screen.text('Error');
-      $result.text('Error');
+      $screen.val('Error');
+      $result.val('Error');
       return;
     }
-    $result.text(total.toString());
-    scroll_bottom();
+    
+    $result.val(total.toString());
+    scrollBottom();
+    $screen.val('');
     var message = {
             handle: $('#handle').val(),
             message: expression + ' = ' + total.toString(),
@@ -60,12 +71,12 @@ $(document).ready(function(){
   });
 
   $('#calc-board').on('click', 'span:not(#clear):not(#equals)', function(event) {
-    var screen = $screen.text();
+    var screen = $screen.val();
     if (screen === 'Error') {
       return;
     }
 
     var nextScreen = screen + event.target.textContent;
-    $screen.text(nextScreen);
+    $screen.val(nextScreen);
   });
 });
